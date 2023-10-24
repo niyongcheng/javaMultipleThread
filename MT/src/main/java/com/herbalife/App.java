@@ -4,10 +4,7 @@ import com.herbalife.thread.CallbackThread;
 import com.herbalife.thread.MyThread;
 import com.herbalife.thread.YourThread;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 
 /**
  * Hello world!
@@ -18,8 +15,7 @@ public class App
     //this is
     private static ExecutorService pool = Executors.newFixedThreadPool(5);
 
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) throws ExecutionException, InterruptedException {
         System.out.println( "Hello World!" );
 
         MyThread myThread = new MyThread();
@@ -40,5 +36,12 @@ public class App
         //submit callback thread
         FutureTask<Integer> futuretask = new FutureTask<>(new CallbackThread());
         pool.submit(futuretask);
+
+        CompletableFuture<Integer> myFuture = CompletableFuture.supplyAsync(() -> {
+            System.out.printf("this is my thread");
+            return 1;
+        });
+
+        System.out.printf("this is my xxx:" + myFuture.get());
     }
 }
