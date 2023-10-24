@@ -38,7 +38,6 @@ public class App
         pool.submit(futuretask);
 
         CompletableFuture<Integer> myFuture = CompletableFuture.supplyAsync(() -> {
-            System.out.printf("this is my thread");
             return 1;
         });
 
