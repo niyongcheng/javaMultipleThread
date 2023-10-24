@@ -42,5 +42,14 @@ public class App
         });
 
         System.out.printf("this is my xxx:" + myFuture.get());
+
+        //
+        completedFutureExample();
+    }
+
+    static void completedFutureExample() throws ExecutionException, InterruptedException {
+        //define CompletableFuture
+        CompletableFuture<String> cf = CompletableFuture.completedFuture("Message");
+        System.out.printf(cf.get());
     }
 }
