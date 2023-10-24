@@ -20,5 +20,12 @@ public class App
         myThread.run();
 
         yourThread.start();
+
+        new Thread(()->{
+            //
+            //for (int i = 0; i < 100; i++) {
+            System.out.println("this is:" + "");
+            //}
+        }).start();
     }
 }
