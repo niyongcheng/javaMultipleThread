@@ -23,9 +23,9 @@ public class App
     //this is
     private static ExecutorService pool = Executors.newFixedThreadPool(5);
 
-    public static void main( String[] args ) throws ExecutionException, InterruptedException {
+    public static void main( String[] args ) throws InterruptedException {
 
-        /*System.out.println( "Hello World!" );
+        /*System.out.println("Hello World!");
 
         MyThread myThread = new MyThread();
 
@@ -130,7 +130,7 @@ public class App
 
         System.out.println(ClassLayout.parseInstance(obj).toPrintable());*/
 
-        Thread t1 = new Thread(()->{
+        /*Thread t1 = new Thread(()->{
             Singleton foo = Singleton.getInstance("FOO");
             System.out.println(foo.value);
         });
@@ -142,7 +142,30 @@ public class App
 
 
         t2.start();
-        t1.start();
+        t1.start();*/
+
+        CompletableFuture<Double> cf = CompletableFuture.supplyAsync(()->
+        {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+            }
+            if (Math.random() < 0.3) {
+                throw new RuntimeException("fetch price failed!");
+            }
+            return 5 + Math.random() * 20;
+        });
+
+        cf.thenAccept((result) ->{
+            System.out.println("price:" + result);
+        });
+
+        cf.exceptionally((e) ->{
+            System.out.println(e.getMessage());
+            return null;
+        });
+
+        Thread.sleep(200);
     }
 
     static void completedFutureExample() throws ExecutionException, InterruptedException {
