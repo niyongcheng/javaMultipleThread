@@ -5,6 +5,8 @@ import com.herbalife.thread.MyThread;
 import com.herbalife.thread.TicketRunnable;
 import com.herbalife.thread.YourThread;
 import com.sun.security.auth.UnixNumericUserPrincipal;
+import org.openjdk.jol.info.ClassLayout;
+import singleton.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,14 +116,33 @@ public class App
             }).start();
         }*/
 
-        TicketRunnable t = new TicketRunnable();
+        /*TicketRunnable t = new TicketRunnable();
         Thread t1 = new Thread(t,"窗口1");
         Thread t2 = new Thread(t,"窗口2");
         Thread t3 = new Thread(t,"窗口3");
         //3个窗口同时卖票
         t1.start();
         t2.start();
-        t3.start();
+        t3.start();*/
+
+        /*Thread.sleep(4100);
+        Object obj = new Object();
+
+        System.out.println(ClassLayout.parseInstance(obj).toPrintable());*/
+
+        Thread t1 = new Thread(()->{
+            Singleton foo = Singleton.getInstance("FOO");
+            System.out.println(foo.value);
+        });
+
+        Thread t2 = new Thread(()->{
+            Singleton bar = Singleton.getInstance("Bar");
+            System.out.println(bar.value);
+        });
+
+
+        t2.start();
+        t1.start();
     }
 
     static void completedFutureExample() throws ExecutionException, InterruptedException {
