@@ -1,5 +1,6 @@
 package com.herbalife;
 
+import com.herbalife.removeElement.RemoveElement;
 import com.herbalife.thread.CallbackThread;
 import com.herbalife.thread.MyThread;
 import com.herbalife.thread.TicketRunnable;
@@ -144,7 +145,7 @@ public class App
         t2.start();
         t1.start();*/
 
-        CompletableFuture<Double> cf = CompletableFuture.supplyAsync(()->
+        /*CompletableFuture<Double> cf = CompletableFuture.supplyAsync(()->
         {
             try {
                 Thread.sleep(100);
@@ -165,7 +166,9 @@ public class App
             return null;
         });
 
-        Thread.sleep(200);
+        Thread.sleep(200);*/
+
+        RemoveElement.removeElement(new int[]{1,3,1,3,5},3);
     }
 
     static void completedFutureExample() throws ExecutionException, InterruptedException {
